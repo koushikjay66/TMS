@@ -25,7 +25,9 @@ public class Main {
 	 * 
 	 * @param args
 	 */
+	
 	public static void main(String[] args) {
+		
 		TicketManagementBackend backendToUse = evaluateArgs(args);
 
 		SwingMainController control = new SwingMainController(backendToUse);
@@ -57,13 +59,20 @@ public class Main {
 	 * @see TicketManagementBackend
 	 */
 	private static TicketManagementBackend evaluateArgs(String[] args) {
+
 		if (args == null || args.length == 0) {
 			System.out.println("No arguments passed. Using local backend implemenation.");
 			return new LocalTicketManagementBackend();
+			
 		} else {
 			switch (args[0]) {
 			case "local":
 				return new LocalTicketManagementBackend();
+				
+			case "udp" :
+				return new UDPTicketManagementBackend();
+			case "jms" :
+					return new JMSTicketManagementBackend();
 			// TODO Register new backend implementations here as additional
 			// cases. E.g.:
 			// case "udp":

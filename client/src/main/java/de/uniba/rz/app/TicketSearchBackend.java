@@ -17,10 +17,10 @@ public interface TicketSearchBackend {
 	 * @return a list of {@link Ticket} that fulfill the requested attributes
 	 * @throws TicketException if something failed
 	 */
-	default List<Ticket> getTicketsByName(String name) throws TicketException {
-		throw new UnsupportedOperationException("Not implemented yet");
-	}
-	
+
+	 default List<Ticket> getTicketsByName(String name) throws TicketException{
+			throw new UnsupportedOperationException("Not implemented yet");
+			}
 	/**
 	 * Method to search for a Ticket based on the provided information
 	 * 

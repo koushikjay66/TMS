@@ -33,7 +33,16 @@ public class UDPRemoteAccess implements RemoteAccess{
 					
 					this.datagram_Socket.receive(packet);
 					//System.out.println("Connected: "+ datagram_Socket.getRemoteSocketAddress());
-					System.out.println(new String(packet.getData()));
+					String raw_json_data=new String(packet.getData());
+					
+					/*
+					 * JSON Format is written here 
+					 * {
+					 * 	requestType = int
+					 * 
+					 * }
+					 */
+					
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -41,8 +50,6 @@ public class UDPRemoteAccess implements RemoteAccess{
 					//e.printStackTrace();
 				}
 			}
-		
-		
 	}
 
 	@Override

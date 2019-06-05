@@ -20,7 +20,7 @@ public class TicketServerMain {
 			implementation.prepareStartup(simpleTestStore);
 			new Thread(implementation).start();
 		}
-
+		
 		try (BufferedReader shutdownReader = new BufferedReader(new InputStreamReader(System.in))) {
 			System.out.println("Press enter to shutdown system.");
 			shutdownReader.readLine();

@@ -14,13 +14,13 @@ public class TicketServerMain {
 		TicketStore simpleTestStore = new SimpleTicketStore();
 
 		List<RemoteAccess> remoteAccessImplementations = getAvailableRemoteAccessImplementations(args);
-
+		System.out.println("Now I need to start the server");
 		// Starting remote access implementations:
 		for (RemoteAccess implementation : remoteAccessImplementations) {
 			implementation.prepareStartup(simpleTestStore);
 			new Thread(implementation).start();
 		}
-
+		
 		try (BufferedReader shutdownReader = new BufferedReader(new InputStreamReader(System.in))) {
 			System.out.println("Press enter to shutdown system.");
 			shutdownReader.readLine();
@@ -40,6 +40,7 @@ public class TicketServerMain {
 		// TODO Add your implementations of the RemoteAccess interface
 		// e.g.:
 		// implementations.add(new UdpRemoteAccess(args[0], args[1]));
+		implementations.add(new UDPRemoteAccess());
 
 		return implementations;
 	}

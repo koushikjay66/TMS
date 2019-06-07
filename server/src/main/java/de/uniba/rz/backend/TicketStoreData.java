@@ -15,6 +15,7 @@ import de.uniba.rz.entities.Type;
 public class TicketStoreData implements TicketStore{
 
 	private static HashMap <Integer , Ticket>  TicketData=new HashMap<Integer,Ticket>();
+	private static HashMap<String , RawData[]> ChunkTicketPartialData = new HashMap<String , RawData[]>();
 
 	private String RawTicketData;
 
@@ -23,17 +24,46 @@ public class TicketStoreData implements TicketStore{
 		this.RawTicketData=RawTicketData;
 	}
 
-	public void makeTicket() {
+	public void handleRequest() {
 		Gson g = new Gson();
 		RawData raw_Data_Object =g.fromJson(this.RawTicketData, RawData.class);
 
 		if(isFullTicket(raw_Data_Object) && !isUpdateRequest(raw_Data_Object)) {
-			Ticket t = new Gson().fromJson(raw_Data_Object.Data, Ticket.class);
+			Ticket t = this.createFullTicket(raw_Data_Object);
 			this.storeNewTicket(t.getReporter(), t.getTopic(), t.getDescription(), t.getType(), t.getPriority());
 		}
 	}
 
+	/**
+	 * This method will be used for creating full ticket. 
+	 * Inputs user String data and returns ticket
+	 */
+	public Ticket createFullTicket(RawData raw_Data_Object) {
+		return  new Gson().fromJson(raw_Data_Object.Data, Ticket.class);
+				
+	}
+	
+	public Ticket createTicketFromChunk() {
+		
+		return null;
+	}
+	
+	public static synchronized  boolean putPartialTicketData(String key , RawData[] x) {
+		
+		return false;
+	}
 
+	
+	public static synchronized boolean deletePartialData(String Key) {
+		
+		
+		return true;
+	}
+	
+	public static synchronized RawData[] getPartialData() {
+		
+		return null;
+	}
 	/**
 	 * Check if this is the full ticket or not . If so returns true else false.
 	 * This Function will return true  
@@ -83,6 +113,8 @@ public class TicketStoreData implements TicketStore{
 		TicketStoreData.TicketData.put(id, t);
 
 	} 
+	
+	
 
 	@Override
 	public List<Ticket> getAllTickets() {

@@ -40,28 +40,47 @@ public class TicketStoreData implements TicketStore{
 	 */
 	public Ticket createFullTicket(RawData raw_Data_Object) {
 		return  new Gson().fromJson(raw_Data_Object.Data, Ticket.class);
-				
+
 	}
-	
-	public Ticket createTicketFromChunk() {
-		
+
+	public Ticket createTicketFromChunk(RawData raw_Data_Object) {
+
+
+
 		return null;
 	}
-	
-	public static synchronized  boolean putPartialTicketData(String key , RawData[] x) {
-		
+
+	public static synchronized boolean ifFull(String key)
+	{
+		//will implement check for exist method
+	if	(ChunkTicketPartialData.containsKey(key)==false) {
 		return false;
 	}
 
-	
-	public static synchronized boolean deletePartialData(String Key) {
-		
-		
+		int x= ChunkTicketPartialData.get(key).length;
+		for	(int i=0;i<x;i++)
+		{
+			if(ChunkTicketPartialData.get(key)[i]==null) {
+				return false;
+			}
+		}
 		return true;
 	}
-	
+
+	public static synchronized  boolean putPartialTicketData(String key , RawData[] x) {
+
+		return false;
+	}
+
+
+	public static synchronized boolean deletePartialData(String Key) {
+
+
+		return true;
+	}
+
 	public static synchronized RawData[] getPartialData() {
-		
+
 		return null;
 	}
 	/**
@@ -113,8 +132,8 @@ public class TicketStoreData implements TicketStore{
 		TicketStoreData.TicketData.put(id, t);
 
 	} 
-	
-	
+
+
 
 	@Override
 	public List<Ticket> getAllTickets() {

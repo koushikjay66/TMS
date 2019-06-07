@@ -66,6 +66,17 @@ public class TicketStoreData implements TicketStore{
 		}
 		return true;
 	}
+	
+	public static synchronized RawData[] create_Key_Space(Raw_data_object) {
+		if	(ChunkTicketPartialData.containsKey(key)==false) {
+			return ChunkTicketPartialData.get(key);
+			
+		}
+		raw_data[]x = raw_data(new raw_data_object.chunck.length);
+		ChunkTicketPartialData.put(raw_data.(key),x);
+		return x;
+			
+	}
 
 	public static synchronized  boolean putPartialTicketData(String key , RawData[] x) {
 
